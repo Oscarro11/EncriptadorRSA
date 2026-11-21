@@ -8,7 +8,7 @@
 
 ## Video demostrativo del proyecto
 
-**Enlace al video:** [Ver demostración del proyecto RSA]()
+**Enlace al video:** [Ver demostración del proyecto RSA](https://youtu.be/tcLVibDLlmE)
 
 ## 1. Descripción
 
@@ -198,3 +198,8 @@ El proyecto reproduce el procedimiento RSA requerido y prioriza que los cálculo
 La interfaz utiliza los colores: Prussian Blue (`#0A1128`) como fondo, Deep Navy (`#001F54`) en tarjetas, Yale Blue (`#034078`) en campos y encabezados, Cerulean (`#1282A2`) en acciones, y White (`#FEFCFB`) en textos principales. Los resultados se muestran en tarjetas de solo lectura; el copiado utiliza el portapapeles de Tkinter y no recorta espacios ni modifica los ceros iniciales.
 
 Los cálculos RSA se encuentran en `backend/` y la presentación en `frontend/`. El archivo `requirements.txt` no declara paquetes de terceros.
+
+## DISCLAIMER
+
+La realización de este proyecto fue asistida con IA, como apoyo en la estructura del proyecto y selección de tecnologías para
+la implementación de la interfaz
