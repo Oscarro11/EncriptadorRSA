@@ -1,1 +1,2 @@
-# No se requieren paquetes externos.
+# Solo necesario para la interfaz web. El escritorio usa la biblioteca estándar.
+streamlit==1.67.0

@@ -1,0 +1,28 @@
+/* Paleta y tarjetas de frontend/interfaz.py, sin depender de Tkinter. */
+.stApp, .stApp button, .stApp input, .stApp textarea {
+    font-family: "Segoe UI", sans-serif;
+}
+.block-container { max-width: 1160px; padding-top: 2rem; }
+h1 { font-size: 2rem !important; letter-spacing: .02em; }
+h2 { font-size: 1.65rem !important; }
+h3 { font-size: 1.1rem !important; }
+.rsa-eyebrow, .rsa-footer { color: #B5C8DB; font-size: .75rem; letter-spacing: .12em; }
+.rsa-status { color: #5DE1B4; font-size: .85rem; }
+[data-testid="stVerticalBlockBorderWrapper"] > div {
+    background: #001F54; border-radius: 18px;
+}
+[data-testid="stForm"] { background: #001F54; border-color: #184875; border-radius: 18px; }
+[data-baseweb="input"], [data-baseweb="textarea"] { background: #034078; border-color: #184875; }
+[data-baseweb="input"] input, [data-baseweb="textarea"] textarea { background: #034078; }
+[data-baseweb="tab-list"] { gap: 12px; padding-bottom: 12px; }
+[data-baseweb="tab"] { background: #001F54; border-radius: 8px; padding: 12px 22px; }
+[data-baseweb="tab"][aria-selected="true"] { background: #1282A2; color: #FEFCFB; }
+.rsa-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.rsa-metric { background: #034078; padding: 14px; border-radius: 8px; overflow-wrap: anywhere; }
+.rsa-metric span { display: block; color: #B5C8DB; font-size: .75rem; margin-bottom: 6px; }
+.rsa-metric strong { font-size: 1rem; }
+@media (max-width: 640px) {
+    .block-container { padding: 1rem; }
+    .rsa-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    [data-baseweb="tab"] { padding: 10px 12px; }
+}

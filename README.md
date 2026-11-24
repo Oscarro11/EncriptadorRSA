@@ -1,28 +1,29 @@
 # Proyecto de criptografía RSA
 
-**Curso:** MM2015 — Matemática Discreta
+**Curso:** Matemática Discreta
 **Autores:** [Franco Paiz, Oscar Melchor] 
 **Carnets:**  [25780, 25216]
 **Lenguaje:** Python 3.10 o superior  
-**Interfaz gráfica:** tkinter y ttk
+**Interfaces:** escritorio con tkinter y ttk; web con Streamlit
 
 ## Video demostrativo del proyecto
 
 **Enlace al video:** [Ver demostración del proyecto RSA](https://youtu.be/tcLVibDLlmE)
-
 ## 1. Descripción
 
 Este proyecto implementa un sistema educativo de encriptación y desencriptación RSA con interfaz gráfica. El programa recibe un mensaje de texto y parámetros RSA, transforma el mensaje en bloques numéricos y calcula el cifrado mediante aritmética modular. También realiza el proceso inverso para recuperar exactamente el texto original, incluidos sus espacios.
 
 La aplicación está dividida en un **backend**, responsable de las operaciones matemáticas y las validaciones, y un **frontend** desarrollado con `tkinter` y `ttk`, que permite ingresar los datos y consultar los resultados. La interfaz permite cambiar entre las operaciones, consultar los parámetros calculados y revisar el detalle de cada bloque. La tabla de detalles muestra la conversión ASCII y los bloques antes y después de la transformación RSA.
 
+También incluye una interfaz web con **Streamlit**, que utiliza las mismas funciones del backend y puede publicarse en Streamlit Community Cloud. Ambas interfaces se encuentran en `frontend/` y tienen puntos de entrada independientes.
+
 Esta implementación tiene fines académicos y **no debe utilizarse para proteger información real**: trabaja con módulos pequeños y un esquema de representación fijo, según las condiciones del enunciado.
 
 ## 2. Requisitos e instalación
 
-- Python **3.10 o superior** con soporte para `tkinter`.
-- No se requieren paquetes de terceros: el proyecto utiliza únicamente la biblioteca estándar (`tkinter`, `dataclasses`, `math`, entre otras).
-- `requirements.txt` se incluye para dejar constancia de que no hay dependencias externas; no es necesario instalar paquetes con `pip`.
+- Escritorio: Python **3.10 o superior** con soporte para `tkinter`, sin paquetes externos.
+- Web: Python **3.11 o superior** (se recomienda **3.12**) e instalar las dependencias de `requirements.txt`.
+- El backend sigue utilizando únicamente la biblioteca estándar. Streamlit es una dependencia de la interfaz web.
 
 Descargar o copiar la carpeta `proyecto_rsa` y abrir una terminal dentro de ella. Para comprobar la versión de Python:
 
@@ -40,6 +41,8 @@ En algunos sistemas Linux es necesario instalar el paquete de soporte de Tk medi
 
 ## 3. Ejecución
 
+### Escritorio
+
 Desde la raíz del proyecto:
 
 ```bash
@@ -47,6 +50,29 @@ python main.py
 ```
 
 Se abrirá la aplicación **RSA Studio**, con dos secciones de navegación: **Encriptar** y **Desencriptar**. El contenido dispone de desplazamiento vertical cuando la ventana no tiene espacio suficiente. Si el comando `python` no está disponible, puede ser necesario utilizar `python3` según el sistema operativo.
+
+### Web local
+
+Desde la raíz del proyecto, instalar las dependencias e iniciar Streamlit:
+
+```bash
+python -m pip install -r requirements.txt
+python -m streamlit run app_streamlit.py
+```
+
+Abrir la dirección local que indique la terminal (normalmente `http://localhost:8501`). Para detener el servidor, presionar **Ctrl+C**. En Windows, si Python está instalado mediante el lanzador `py`, se puede sustituir `python` por `py` en estos comandos.
+
+Opcionalmente, crear primero un entorno virtual con `python -m venv .venv`. En PowerShell se puede usar directamente `.\.venv\Scripts\python.exe` en lugar de `python`, sin activar el entorno.
+
+Si Python se queda detenido al importar archivos en una carpeta sincronizada con OneDrive, se puede probar con una caché nueva dentro del entorno virtual, sin modificar el backend:
+
+```powershell
+.\.venv\Scripts\python.exe -X pycache_prefix=.venv/qa-cache -m streamlit run app_streamlit.py
+```
+
+La versión web reutiliza el backend y mantiene las dos operaciones, la paleta azul, las tarjetas de resumen y la tabla de bloques del escritorio. Los formularios calculan al enviar; los resultados corresponden al último envío y se conservan durante la sesión. Una operación inválida limpia el resultado anterior de esa operación. Al recargar la página puede perderse el estado de la sesión.
+
+El icono de copia de cada bloque permite copiar el resultado y **L** por separado. **DESCARGAR RESULTADO** guarda exactamente el texto, sin añadir saltos de línea ni eliminar espacios. No se necesitan Tkinter, una API separada ni una base de datos para ejecutar la web.
 
 ## 4. Uso de la aplicación
 
@@ -167,6 +193,9 @@ Las implementaciones propias de MCD, inverso modular y exponenciación modular s
 
 ```text
 proyecto_rsa/
+├── app_streamlit.py
+├── .streamlit/
+│   └── config.toml
 ├── main.py
 ├── backend/
 │   ├── __init__.py
@@ -179,10 +208,13 @@ proyecto_rsa/
 │   └── rsa.py
 ├── frontend/
 │   ├── __init__.py
-│   └── interfaz.py
+│   ├── interfaz.py
+│   ├── interfaz_streamlit.py
+│   └── estilos_streamlit.css
 ├── pruebas/
 │   ├── __init__.py
-│   └── test_backend.py
+│   ├── test_backend.py
+│   └── test_streamlit.py
 ├── README.md
 └── requirements.txt
 ```
@@ -197,7 +229,24 @@ El proyecto reproduce el procedimiento RSA requerido y prioriza que los cálculo
 
 La interfaz utiliza los colores: Prussian Blue (`#0A1128`) como fondo, Deep Navy (`#001F54`) en tarjetas, Yale Blue (`#034078`) en campos y encabezados, Cerulean (`#1282A2`) en acciones, y White (`#FEFCFB`) en textos principales. Los resultados se muestran en tarjetas de solo lectura; el copiado utiliza el portapapeles de Tkinter y no recorta espacios ni modifica los ceros iniciales.
 
-Los cálculos RSA se encuentran en `backend/` y la presentación en `frontend/`. El archivo `requirements.txt` no declara paquetes de terceros.
+Los cálculos RSA se encuentran en `backend/` y la presentación en `frontend/`. La interfaz de escritorio no se ha modificado para añadir la web. `requirements.txt` declara Streamlit para la nueva interfaz; `.streamlit/config.toml` y `frontend/estilos_streamlit.css` adaptan la paleta y las tarjetas al navegador.
+
+
+### Límites de la interfaz web
+
+Para mantener acotado el trabajo en el servidor compartido, la web admite hasta **2000 caracteres de mensaje**, **6999 caracteres de cifrado** (1000 bloques), **32 caracteres por parámetro** y cuatro caracteres para L. Comprueba que p y q estén entre 2 y 999999 antes de llamar al backend. Estos límites se aplican solo en la presentación web; los algoritmos y las reglas matemáticas del backend permanecen intactos. Se sigue permitiendo e mayor que φ dentro del límite de entrada web.
+
+### Comprobaciones de la interfaz web
+
+Después de instalar las dependencias:
+
+```bash
+python -m pruebas.test_backend
+python -m unittest pruebas.test_streamlit
+```
+
+Las pruebas web comprueban el ejemplo oficial, recuperación exacta de espacios, limpieza de resultados ante errores, límites web y aislamiento de sesiones.
+
 
 ## DISCLAIMER
 
