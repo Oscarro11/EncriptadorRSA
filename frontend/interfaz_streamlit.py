@@ -138,5 +138,5 @@ def main() -> None:
                                  ("encriptar", "desencriptar")):
         with pestaña:
             _pagina(operacion)
-    st.info("Demostración académica. No utilices esta implementación para proteger información real.")
+    st.info("Demostración académica. No se debería utilizar esta implementación para proteger información real.")
     st.markdown('<p class="rsa-footer">MM2015 / PROYECTO RSA</p>', unsafe_allow_html=True)

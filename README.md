@@ -15,15 +15,14 @@ Este proyecto implementa un sistema educativo de encriptación y desencriptació
 
 La aplicación está dividida en un **backend**, responsable de las operaciones matemáticas y las validaciones, y un **frontend** desarrollado con `tkinter` y `ttk`, que permite ingresar los datos y consultar los resultados. La interfaz permite cambiar entre las operaciones, consultar los parámetros calculados y revisar el detalle de cada bloque. La tabla de detalles muestra la conversión ASCII y los bloques antes y después de la transformación RSA.
 
-También incluye una interfaz web con **Streamlit**, que utiliza las mismas funciones del backend y puede publicarse en Streamlit Community Cloud. Ambas interfaces se encuentran en `frontend/` y tienen puntos de entrada independientes.
+También incluye una interfaz web con **Streamlit**, que utiliza las mismas funciones del backend y ha sido publicada en **Streamlit Community Cloud:** [Ver despliegue del proyecto](https://encriptadorrsa-oc3rz9cszbsakskc5jwh7z.streamlit.app/). Ambas interfaces se encuentran en `frontend/` y tienen puntos de entrada independientes.
 
-Esta implementación tiene fines académicos y **no debe utilizarse para proteger información real**: trabaja con módulos pequeños y un esquema de representación fijo, según las condiciones del enunciado.
+Esta implementación tiene fines académicos y **no debe utilizarse para proteger información real**: trabaja con módulos pequeños y un esquema de representación fijo, el cual es fácil de verificar
 
 ## 2. Requisitos e instalación
 
 - Escritorio: Python **3.10 o superior** con soporte para `tkinter`, sin paquetes externos.
 - Web: Python **3.11 o superior** (se recomienda **3.12**) e instalar las dependencias de `requirements.txt`.
-- El backend sigue utilizando únicamente la biblioteca estándar. Streamlit es una dependencia de la interfaz web.
 
 Descargar o copiar la carpeta `proyecto_rsa` y abrir una terminal dentro de ella. Para comprobar la versión de Python:
 
@@ -69,10 +68,6 @@ Si Python se queda detenido al importar archivos en una carpeta sincronizada con
 ```powershell
 .\.venv\Scripts\python.exe -X pycache_prefix=.venv/qa-cache -m streamlit run app_streamlit.py
 ```
-
-La versión web reutiliza el backend y mantiene las dos operaciones, la paleta azul, las tarjetas de resumen y la tabla de bloques del escritorio. Los formularios calculan al enviar; los resultados corresponden al último envío y se conservan durante la sesión. Una operación inválida limpia el resultado anterior de esa operación. Al recargar la página puede perderse el estado de la sesión.
-
-El icono de copia de cada bloque permite copiar el resultado y **L** por separado. **DESCARGAR RESULTADO** guarda exactamente el texto, sin añadir saltos de línea ni eliminar espacios. No se necesitan Tkinter, una API separada ni una base de datos para ejecutar la web.
 
 ## 4. Uso de la aplicación
 
